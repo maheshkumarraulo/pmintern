@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM Internship Scheme</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #0066cc;
+            --secondary-blue: #003366;
+            --accent-orange: #ff6600;
+            --light-blue: #99ccff;
+            --white: #ffffff;
+        }
+        
+        body {
+            font-family: 'Open Sans', Helvetica, sans-serif;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Roboto', Arial, sans-serif;
+            font-weight: 700;
+        }
+        
+        .top-bar {
+            background-color: var(--secondary-blue);
+            color: white;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+        
+        .header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+        }
+        
+        .logo-text {
+            color: var(--secondary-blue);
+            font-weight: 700;
+            font-size: 24px;
+        }
+        
+        .nav-link {
+            color: #333;
+            font-weight: 500;
+            padding: 10px 15px !important;
+            font-family: 'Roboto', Arial, sans-serif;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-blue);
+        }
+        
+        .btn-register {
+            background-color: var(--accent-orange);
+            color: white;
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+        }
+        
+        .btn-register:hover {
+            background-color: #e55a00;
+            color: white;
+        }
+        
+        .hero-section {
+            background: linear-gradient(rgba(0, 51, 102, 0.8), rgba(0, 102, 204, 0.8)), url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .hero-title {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 40px;
+        }
+        
+        .btn-hero {
+            background-color: var(--accent-orange);
+            color: white;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-radius: 5px;
+            font-family: Arial, sans-serif;
+        }
+        
+        .section-title {
+            color: var(--secondary-blue);
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--accent-orange);
+            margin: 15px auto;
+        }
+        
+        .eligibility-card, .benefit-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            height: 100%;
+            transition: transform 0.3s;
+        }
+        
+        .eligibility-card:hover, .benefit-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .eligibility-icon, .benefit-icon {
+            font-size: 40px;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+        }
+        
+        .category-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s;
+            height: 100%;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .category-icon {
+            font-size: 50px;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+        }
+        
+        .company-logo {
+            height: 40px;
+            margin: 10px;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+        
+        .company-logo:hover {
+            opacity: 1;
+        }
+        
+        .footer {
+            background-color: var(--secondary-blue);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-title {
+            color: white;
+            margin-bottom: 25px;
+            font-size: 1.2rem;
+        }
+        
+        .footer-link {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+            transition: color 0.3s;
+        }
+        
+        .footer-link:hover {
+            color: white;
+            text-decoration: underline;
+        }
+        
+        .social-icon {
+            color: white;
+            font-size: 20px;
+            margin-right: 15px;
+            transition: color 0.3s;
+        }
+        
+        .social-icon:hover {
+            color: var(--accent-orange);
+        }
+        
+        .copyright {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            margin-top: 40px;
+            text-align: center;
+        }
+        
+        /* Chatbot */
+        .chatbot-icon {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--primary-blue);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+        
+        .chatbot-container {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 350px;
+            height: 450px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+        }
+        
+        .chatbot-header {
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 15px;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chatbot-messages {
+            padding: 15px;
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+        
+        .message {
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            border-radius: 10px;
+            max-width: 80%;
+        }
+        
+        .bot-message {
+            background-color: #f0f5ff;
+            align-self: flex-start;
+        }
+        
+        .user-message {
+            background-color: var(--primary-blue);
+            color: white;
+            align-self: flex-end;
+            margin-left: auto;
+        }
+        
+        .chatbot-input {
+            padding: 15px;
+            border-top: 1px solid #eee;
+            display: flex;
+        }
+        
+        .chatbot-input input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        
+        .chatbot-input button {
+            background-color: var(--primary-blue);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+        
+        /* Video Section */
+        .video-section {
+            background-color: var(--light-blue);
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .video-container {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .video-thumbnail {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+        
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 80px;
+            color: white;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+            cursor: pointer;
+        }
+        
+        .play-button:hover {
+            opacity: 1;
+        }
+        
+        /* Application Dashboard */
+        .dashboard-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .status-badge {
+            padding: 8px 15px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .status-submitted {
+            background-color: #e9f5ff;
+            color: var(--primary-blue);
+        }
+        
+        .status-review {
+            background-color: #fff8e1;
+            color: #ff9800;
+        }
+        
+        .status-shortlisted {
+            background-color: #e7f6e9;
+            color: #2e7d32;
+        }
+        
+        .status-selected {
+            background-color: #e7f6e9;
+            color: #2e7d32;
+        }
+        
+        .progress {
+            height: 10px;
+            margin: 15px 0;
+        }
+        
+        /* Accessibility */
+        .accessibility-toolbar {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: flex-end;
+        }
+        
+        .accessibility-btn {
+            background: none;
+            border: none;
+            margin-left: 15px;
+            cursor: pointer;
+            color: #555;
+        }
+        
+        .accessibility-btn:hover {
+            color: var(--primary-blue);
+        }
+        
+        /* High contrast mode */
+        .high-contrast {
+            background-color: black !important;
+            color: white !important;
+        }
+        
+        .high-contrast .card {
+            background-color: #000 !important;
+            color: #fff !important;
+            border: 1px solid yellow !important;
+        }
+        
+        .high-contrast .navbar {
+            background-color: #000 !important;
+            border-bottom: 1px solid yellow !important;
+        }
+        
+        .high-contrast .nav-link {
+            color: #fff !important;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .chatbot-container {
+                width: 300px;
+                height: 400px;
+                right: 15px;
+            }
+            
+            .chatbot-icon {
+                right: 15px;
+                bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Accessibility Toolbar -->
+    <div class="accessibility-toolbar">
+        <button class="accessibility-btn" id="increase-text">A+</button>
+        <button class="accessibility-btn" id="decrease-text">A-</button>
+        <button class="accessibility-btn" id="high-contrast-toggle"><i class="fas fa-adjust"></i></button>
+        <button class="accessibility-btn" id="reset-accessibility"><i class="fas fa-redo"></i></button>
+    </div>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <span><i class="fas fa-envelope me-2"></i>contact-pminternship@gov.in</span>
+                </div>
+                <div class="col-md-6 text-end">
+                    <span><i class="fas fa-phone me-2"></i>Helpline: 011-12345678</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">
+                        <img src="https://pminternship.mca.gov.in/Content/images/emblem-dark.png" alt="Government Emblem" height="60" class="me-2">
+                        <span class="logo-text">PM Internship Scheme</span>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#"><i class="fas fa-home me-1"></i> Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"><i class="fas fa-file-alt me-1"></i> Apply</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"><i class="fas fa-building me-1"></i> Partner Companies</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"><i class="fas fa-headset me-1"></i> Support</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"><i class="fas fa-question-circle me-1"></i> FAQs</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#"><i class="fas fa-phone-alt me-1"></i> Contact Us</a>
+                            </li>
+                        </ul>
+                        <button class="btn btn-register ms-3">Youth Registration</button>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <h1 class="hero-title">Empowering Youth Through Internships</h1>
+            <p class="hero-subtitle">Join the PM Internship Scheme and gain real-world experience</p>
+            <button class="btn btn-hero">Apply Now</button>
+        </div>
+    </section>
+    
+    <!-- Eligibility Section -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-title">Eligibility Criteria</h2>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="eligibility-card">
+                        <div class="eligibility-icon">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h4>Age 21-24</h4>
+                        <p>Applicants must be between 21 and 24 years of age at the time of application.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="eligibility-card">
+                        <div class="eligibility-icon">
+                            <i class="fas fa-passport"></i>
+                        </div>
+                        <h4>Indian Citizen</h4>
+                        <p>Must be a citizen of India with valid proof of nationality.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="eligibility-card">
+                        <div class="eligibility-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h4>Education</h4>
+                        <p>Must have completed at least secondary education from a recognized board.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="eligibility-card">
+                        <div class="eligibility-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <h4>Employment Status</h4>
+                        <p>Not currently in full-time employment or education during the internship period.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Benefits Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title">Internship Benefits</h2>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-money-bill-wave"></i>
+                        </div>
+                        <h4>Monthly Stipend</h4>
+                        <p>₹5,000 per month (₹4,500 from government + ₹500 from company)</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-gift"></i>
+                        </div>
+                        <h4>One-time Grant</h4>
+                        <p>₹6,000 one-time grant for learning materials and expenses</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4>Insurance Coverage</h4>
+                        <p>Comprehensive health and accident insurance for the internship period</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <h4>Internship Certificate</h4>
+                        <p>Official certificate upon successful completion of the internship</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <h4>Industry Exposure</h4>
+                        <p>Gain valuable industry experience and professional networking opportunities</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="benefit-card">
+                        <div class="benefit-icon">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <h4>Mentorship</h4>
+                        <p>Guidance from industry experts and professionals throughout the internship</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Internship Categories -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-title">Internship Categories</h2>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h4>Information Technology</h4>
+                        <p>Software development, data analysis, cybersecurity, and more</p>
+                        <div class="mt-4">
+                            <img src="https://via.placeholder.com/80x40?text=Company" alt="Company Logo" class="company-logo">
+                            <img src="https://via.placeholder.com/80x40?text=Company" alt="Company Logo" class="company-logo">
+                            <img src="https://via.placeholder.com/80x40?text=Company" alt="Company Logo" class="company-logo">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h4>Finance</h4>
+                        <p>Banking, accounting, financial analysis, and investment</p>
+                        <div class="mt-4">
+                            <img src="https://via.placeholder.com/80x40?text=Company" alt="Company Logo" class="company-logo">
+                            <img src="https://via.placeholder.com/80x40?text=Company" alt="Company Logo" class="company-logo">
+                            <img src="https://via.placeholder.com/80x40?text=Company" alt="Company Logo" class="company-logo">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <h4>Healthcare</h4>
+                        <p>Medical research, healthcare administration, pharmaceuticals</p>
+                        <div class="mt-4">
+                            <img src="https://via.placeholder.com/80x40?text=Company" alt="Company Logo" class="company-logo">
+                            <img src="https://via.placeholder.com/80x40?text=Company" alt="Company Logo" class="company-logo">
+                            <img src="https://via.placeholder.com/80x40?text=Company" alt="Company Logo" class="company-logo">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="fas fa-industry"></i>
+                        </div>
+                        <h4>Manufacturing</h4>
+                        <p>Engineering, production management, quality control</p>
+                        <div class="mt-4">
+                            <img src="https://via.placeholder.com/80x40?text=Company" alt="Company Logo" class="company-logo">
+                            <img src="https://via.placeholder.com/80x40?text=Company" alt="Company Logo" class="company-logo">
+                            <img src="https://via.placeholder.com/80x40?text=Company" alt="Company Logo" class="company-logo">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Video Section -->
+    <section class="video-section">
+        <div class="container">
+            <h2 class="section-title text-white">How the PM Internship Scheme Works</h2>
+            <div class="video-container">
+                <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Video thumbnail" class="video-thumbnail" id="videoThumbnail">
+                <div class="play-button" id="playButton">
+                    <i class="fas fa-play-circle"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Application Dashboard -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-title">My Applications</h2>
+            <div class="dashboard-card">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h4>Software Developer Intern at Tech Solutions Inc.</h4>
+                    <span class="status-badge status-shortlisted">Shortlisted</span>
+                </div>
+                <p class="text-muted">Applied on: August 15, 2023</p>
+                <div class="progress">
+                    <div class="progress-bar bg-success" role="progressbar" style="width: 75%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span>Application Submitted</span>
+                    <span>Under Review</span>
+                    <span>Shortlisted</span>
+                    <span>Selected</span>
+                </div>
+            </div>
+            
+            <div class="dashboard-card">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h4>Marketing Intern at Global Ad Agency</h4>
+                    <span class="status-badge status-review">Under Review</span>
+                </div>
+                <p class="text-muted">Applied on: September 2, 2023</p>
+                <div class="progress">
+                    <div class="progress-bar bg-warning" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span>Application Submitted</span>
+                    <span>Under Review</span>
+                    <span>Shortlisted</span>
+                    <span>Selected</span>
+                </div>
+            </div>
+            
+            <div class="dashboard-card">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h4>Finance Analyst Intern at National Bank</h4>
+                    <span class="status-badge status-submitted">Submitted</span>
+                </div>
+                <p class="text-muted">Applied on: September 10, 2023</p>
+                <div class="progress">
+                    <div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span>Application Submitted</span>
+                    <span>Under Review</span>
+                    <span>Shortlisted</span>
+                    <span>Selected</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5 class="footer-title">PM Internship Scheme</h5>
+                    <p>A initiative by the Government of India to provide valuable internship opportunities to students across the country.</p>
+                    <div class="mt-3">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4">
+                    <h5 class="footer-title">Quick Links</h5>
+                    <a href="#" class="footer-link">Home</a>
+                    <a href="#" class="footer-link">Apply</a>
+                    <a href="#" class="footer-link">Partner Companies</a>
+                    <a href="#" class="footer-link">Support</a>
+                    <a href="#" class="footer-link">FAQs</a>
+                    <a href="#" class="footer-link">Contact Us</a>
+                </div>
+                <div class="col-lg-3 col-md-4 mb-4">
+                    <h5 class="footer-title">Legal</h5>
+                    <a href="#" class="footer-link">Privacy Policy</a>
+                    <a href="#" class="footer-link">Terms of Service</a>
+                    <a href="#" class="footer-link">Disclaimer</a>
+                    <a href="#" class="footer-link">Copyright Policy</a>
+                </div>
+                <div class="col-lg-3 col-md-4 mb-4">
+                    <h5 class="footer-title">Contact Info</h5>
+                    <p><i class="fas fa-map-marker-alt me-2"></i> Ministry of Education, New Delhi</p>
+                    <p><i class="fas fa-phone me-2"></i> Helpline: 011-12345678</p>
+                    <p><i class="fas fa-envelope me-2"></i> contact-pminternship@gov.in</p>
+                </div>
+            </div>
+            <div class="copyright text-center">
+                <p class="mb-0">© 2023 PM Internship Scheme. All Rights Reserved.</p>
+                <p class="mb-0">Designed and Developed by Ministry of Education, Government of India</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Chatbot Icon -->
+    <div class="chatbot-icon" id="chatbotIcon">
+        <i class="fas fa-comments fa-2x"></i>
+    </div>
+    
+    <!-- Chatbot Container -->
+    <div class="chatbot-container" id="chatbotContainer">
+        <div class="chatbot-header">
+            <h5 class="mb-0">PM Internship Assistant</h5>
+            <button class="btn btn-sm btn-light" id="closeChatbot">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="chatbot-messages" id="chatbotMessages">
+            <div class="message bot-message">
+                Hello! I'm here to help you with the PM Internship Scheme. How can I assist you today?
+            </div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="chatbotInput" placeholder="Type your message here...">
+            <button id="sendMessage"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Chatbot functionality
+        const chatbotIcon = document.getElementById('chatbotIcon');
+        const chatbotContainer = document.getElementById('chatbotContainer');
+        const closeChatbot = document.getElementById('closeChatbot');
+        const chatbotMessages = document.getElementById('chatbotMessages');
+        const chatbotInput = document.getElementById('chatbotInput');
+        const sendMessageBtn = document.getElementById('sendMessage');
+        
+        chatbotIcon.addEventListener('click', () => {
+            chatbotContainer.style.display = 'flex';
+        });
+        
+        closeChatbot.addEventListener('click', () => {
+            chatbotContainer.style.display = 'none';
+        });
+        
+        function addMessage(text, isUser = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message');
+            messageDiv.classList.add(isUser ? 'user-message' : 'bot-message');
+            messageDiv.textContent = text;
+            chatbotMessages.appendChild(messageDiv);
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        }
+        
+        function handleUserMessage() {
+            const message = chatbotInput.value.trim();
+            if (message) {
+                addMessage(message, true);
+                chatbotInput.value = '';
+                
+                // Simulate bot response after a short delay
+                setTimeout(() => {
+                    let response = '';
+                    
+                    if (message.toLowerCase().includes('apply') || message.toLowerCase().includes('application')) {
+                        response = 'To apply for an internship, please visit the "Apply" section on our website. You can also use the Quick Apply feature if you have a saved profile.';
+                    } else if (message.toLowerCase().includes('eligibility') || message.toLowerCase().includes('qualify')) {
+                        response = 'To be eligible for the PM Internship Scheme, you must be between 21-24 years old, an Indian citizen, have completed at least secondary education, and not be in full-time employment or education.';
+                    } else if (message.toLowerCase().includes('stipend') || message.toLowerCase().includes('payment')) {
+                        response = 'Interns receive a stipend of ₹5,000 per month (₹4,500 from government + ₹500 from company) and a one-time grant of ₹6,000 for learning materials.';
+                    } else if (message.toLowerCase().includes('status') || message.toLowerCase().includes('track')) {
+                        response = 'You can check your application status in the "My Applications" section of your dashboard. It will show whether your application is submitted, under review, shortlisted, or selected.';
+                    } else {
+                        response = 'I\'m here to help with information about the PM Internship Scheme. You can ask me about eligibility, application process, benefits, or application status.';
+                    }
+                    
+                    addMessage(response);
+                }, 1000);
+            }
+        }
+        
+        sendMessageBtn.addEventListener('click', handleUserMessage);
+        chatbotInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                handleUserMessage();
+            }
+        });
+        
+        // Video functionality
+        const videoThumbnail = document.getElementById('videoThumbnail');
+        const playButton = document.getElementById('playButton');
+        
+        playButton.addEventListener('click', () => {
+            // In a real implementation, this would play a video
+            // For this prototype, we'll simulate playing and redirect
+            alert('Video would play here. After completion, you would be redirected to the application page.');
+            window.location.href = '#apply'; // This would redirect to the application page
+        });
+        
+        // Accessibility features
+        const increaseTextBtn = document.getElementById('increase-text');
+        const decreaseTextBtn = document.getElementById('decrease-text');
+        const highContrastToggle = document.getElementById('high-contrast-toggle');
+        const resetAccessibility = document.getElementById('reset-accessibility');
+        
+        increaseTextBtn.addEventListener('click', () => {
+            document.body.style.fontSize = parseInt(getComputedStyle(document.body).fontSize) + 2 + 'px';
+        });
+        
+        decreaseTextBtn.addEventListener('click', () => {
+            document.body.style.fontSize = parseInt(getComputedStyle(document.body).fontSize) - 2 + 'px';
+        });
+        
+        highContrastToggle.addEventListener('click', () => {
+            document.body.classList.toggle('high-contrast');
+        });
+        
+        resetAccessibility.addEventListener('click', () => {
+            document.body.style.fontSize = '';
+            document.body.classList.remove('high-contrast');
+        });
+        
+        // Quick Apply simulation
+        document.querySelector('.btn-hero').addEventListener('click', function() {
+            const hasProfile = confirm('Do you have a saved profile? Click OK to use Quick Apply or Cancel to fill out a new application.');
+            
+            if (hasProfile) {
+                alert('Your profile information would be auto-filled. You would be redirected to the application form.');
+            } else {
+                alert('You will be redirected to the registration page to create a profile first.');
+            }
+        });
+    </script>
+</body>
+</html>
