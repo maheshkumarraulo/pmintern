@@ -1,0 +1,92 @@
+<!-- ... keep your existing HTML ... -->
+
+    <!-- Chatbot -->
+    <div class="chatbot" id="chatbot-btn">
+        <i class="fas fa-comment-dots"></i>
+    </div>
+
+    <!-- Chat Window -->
+    <div id="chat-window" style="display:none; position:fixed; bottom:100px; right:30px; width:300px; height:400px; background:#fff; border-radius:10px; box-shadow:0 4px 15px rgba(0,0,0,0.2); overflow:hidden; display:flex; flex-direction:column; z-index:1000;">
+        <div style="background:#1a4f8e; color:white; padding:10px; text-align:center; font-weight:bold;">AI Assistant</div>
+        <div id="chat-messages" style="flex:1; padding:10px; overflow-y:auto; font-size:14px;"></div>
+        <div style="display:flex; border-top:1px solid #ddd;">
+            <input id="chat-input" type="text" placeholder="Type a message..." style="flex:1; border:none; padding:10px; outline:none;">
+            <button id="chat-send" style="background:#1a4f8e; color:white; border:none; padding:0 15px; cursor:pointer;">Send</button>
+        </div>
+    </div>
+
+    <script>
+        // Hamburger menu functionality for mobile
+        document.querySelector('.hamburger').addEventListener('click', function() {
+            const navItems = document.querySelector('.nav-items');
+            navItems.style.display = navItems.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Adjust navigation for mobile on resize
+        window.addEventListener('resize', function() {
+            const navItems = document.querySelector('.nav-items');
+            if (window.innerWidth > 768) {
+                navItems.style.display = 'flex';
+            } else {
+                navItems.style.display = 'none';
+            }
+        });
+
+        // Initialize for mobile view
+        if (window.innerWidth <= 768) {
+            document.querySelector('.nav-items').style.display = 'none';
+        }
+
+        // Chatbot UI toggle
+        const chatbotBtn = document.getElementById("chatbot-btn");
+        const chatWindow = document.getElementById("chat-window");
+        chatbotBtn.addEventListener("click", () => {
+            chatWindow.style.display = chatWindow.style.display === "none" ? "flex" : "none";
+        });
+
+        // Chat functionality
+        const chatMessages = document.getElementById("chat-messages");
+        const chatInput = document.getElementById("chat-input");
+        const chatSend = document.getElementById("chat-send");
+
+        function addMessage(content, isUser = false) {
+            const msg = document.createElement("div");
+            msg.style.margin = "5px 0";
+            msg.style.padding = "8px 12px";
+            msg.style.borderRadius = "10px";
+            msg.style.maxWidth = "80%";
+            msg.style.wordWrap = "break-word";
+            msg.style.background = isUser ? "#1a4f8e" : "#f1f1f1";
+            msg.style.color = isUser ? "white" : "black";
+            msg.style.alignSelf = isUser ? "flex-end" : "flex-start";
+            msg.textContent = content;
+            chatMessages.appendChild(msg);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        async function sendMessage() {
+            const message = chatInput.value.trim();
+            if (!message) return;
+            addMessage(message, true);
+            chatInput.value = "";
+
+            try {
+                const res = await fetch("http://localhost:5000/chat", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ message })
+                });
+                const data = await res.json();
+                addMessage(data.reply);
+            } catch (error) {
+                addMessage("⚠️ Error: Unable to connect to server.");
+            }
+        }
+
+        chatSend.addEventListener("click", sendMessage);
+        chatInput.addEventListener("keypress", e => {
+            if (e.key === "Enter") sendMessage();
+        });
+    </script>
+</body>
+</html>
