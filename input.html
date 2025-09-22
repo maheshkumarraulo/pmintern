@@ -178,10 +178,6 @@
             gap: 20px;
         }
 
-        select[multiple] {
-            height: 150px;
-        }
-
         .file-input {
             padding: 10px;
             border: 2px dashed #ddd;
@@ -207,6 +203,94 @@
             text-align: center;
             margin-top: 20px;
             display: none;
+        }
+
+        /* Custom Multi-Select Dropdown */
+        .multiselect-container {
+            position: relative;
+            width: 100%;
+        }
+
+        .multiselect {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            background-color: white;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .multiselect:after {
+            content: '▼';
+            font-size: 12px;
+            transition: var(--transition);
+        }
+
+        .multiselect.active:after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 100;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .dropdown-content.show {
+            display: block;
+        }
+
+        .dropdown-content label {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            margin: 0;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .dropdown-content label:hover {
+            background-color: #f5f5f5;
+        }
+
+        .dropdown-content input {
+            width: auto;
+            margin-right: 10px;
+        }
+
+        .selected-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 10px;
+        }
+
+        .selected-item {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+        }
+
+        .selected-item span {
+            margin-left: 5px;
+            cursor: pointer;
         }
 
         /* Responsive Design */
@@ -301,11 +385,19 @@
                         <label for="district">District</label>
                         <select id="district" name="district">
                             <option value="">Select District</option>
-                            <option value="north">North District</option>
-                            <option value="south">South District</option>
-                            <option value="east">East District</option>
-                            <option value="west">West District</option>
-                            <option value="central">Central District</option>
+                            <option value="srikakulam">Srikakulam</option>
+                            <option value="vizianagaram">Vizianagaram</option>
+                            <option value="visakhapatnam">Visakhapatnam</option>
+                            <option value="east-godavari">East Godavari</option>
+                            <option value="west-godavari">West Godavari</option>
+                            <option value="krishna">Krishna</option>
+                            <option value="guntur">Guntur</option>
+                            <option value="prakasam">Prakasam</option>
+                            <option value="nellore">Nellore</option>
+                            <option value="chittoor">Chittoor</option>
+                            <option value="kadapa">Kadapa</option>
+                            <option value="anantapur">Anantapur</option>
+                            <option value="kurnool">Kurnool</option>
                         </select>
                     </div>
                     <div>
@@ -365,42 +457,47 @@
                 <div class="form-group skills-container">
                     <div>
                         <label for="skills" class="required">Skills</label>
-                        <select id="skills" name="skills" multiple required>
-                            <optgroup label="Technical Skills">
-                                <option value="react">React.js</option>
-                                <option value="python">Python</option>
-                                <option value="java">Java</option>
-                                <option value="cpp">C++</option>
-                                <option value="html">HTML</option>
-                                <option value="css">CSS</option>
-                                <option value="javascript">JavaScript</option>
-                                <option value="ai-ml">AI/ML</option>
-                                <option value="cloud">Cloud Computing</option>
-                            </optgroup>
-                            <optgroup label="Non-Technical Skills">
-                                <option value="leadership">Leadership</option>
-                                <option value="communication">Communication</option>
-                                <option value="digital-marketing">Digital Marketing</option>
-                                <option value="content-writing">Content Writing</option>
-                                <option value="project-management">Project Management</option>
-                            </optgroup>
-                        </select>
-                        <small>Hold Ctrl/Cmd to select multiple options</small>
+                        <div class="multiselect-container">
+                            <div class="multiselect" id="skillsMultiselect">Select Skills</div>
+                            <div class="dropdown-content" id="skillsDropdown">
+                                <h4 style="padding: 10px 15px; margin: 0; border-bottom: 1px solid #eee;">Technical Skills</h4>
+                                <label><input type="checkbox" value="react"> React.js</label>
+                                <label><input type="checkbox" value="python"> Python</label>
+                                <label><input type="checkbox" value="java"> Java</label>
+                                <label><input type="checkbox" value="cpp"> C++</label>
+                                <label><input type="checkbox" value="html"> HTML</label>
+                                <label><input type="checkbox" value="css"> CSS</label>
+                                <label><input type="checkbox" value="javascript"> JavaScript</label>
+                                <label><input type="checkbox" value="ai-ml"> AI/ML</label>
+                                <label><input type="checkbox" value="cloud"> Cloud Computing</label>
+                                
+                                <h4 style="padding: 10px 15px; margin: 0; border-bottom: 1px solid #eee;">Non-Technical Skills</h4>
+                                <label><input type="checkbox" value="leadership"> Leadership</label>
+                                <label><input type="checkbox" value="communication"> Communication</label>
+                                <label><input type="checkbox" value="digital-marketing"> Digital Marketing</label>
+                                <label><input type="checkbox" value="content-writing"> Content Writing</label>
+                                <label><input type="checkbox" value="project-management"> Project Management</label>
+                            </div>
+                            <div class="selected-items" id="skillsSelected"></div>
+                        </div>
                     </div>
                     
                     <div>
                         <label for="languages">Languages Known</label>
-                        <select id="languages" name="languages" multiple>
-                            <option value="english">English</option>
-                            <option value="hindi">Hindi</option>
-                            <option value="tamil">Tamil</option>
-                            <option value="telugu">Telugu</option>
-                            <option value="bengali">Bengali</option>
-                            <option value="kannada">Kannada</option>
-                            <option value="marathi">Marathi</option>
-                            <option value="other">Other</option>
-                        </select>
-                        <small>Hold Ctrl/Cmd to select multiple options</small>
+                        <div class="multiselect-container">
+                            <div class="multiselect" id="languagesMultiselect">Select Languages</div>
+                            <div class="dropdown-content" id="languagesDropdown">
+                                <label><input type="checkbox" value="english"> English</label>
+                                <label><input type="checkbox" value="hindi"> Hindi</label>
+                                <label><input type="checkbox" value="tamil"> Tamil</label>
+                                <label><input type="checkbox" value="telugu"> Telugu</label>
+                                <label><input type="checkbox" value="bengali"> Bengali</label>
+                                <label><input type="checkbox" value="kannada"> Kannada</label>
+                                <label><input type="checkbox" value="marathi"> Marathi</label>
+                                <label><input type="checkbox" value="other"> Other</label>
+                            </div>
+                            <div class="selected-items" id="languagesSelected"></div>
+                        </div>
                     </div>
                 </div>
                 
@@ -452,6 +549,95 @@
             const internshipNo = document.getElementById('internshipNo');
             const internshipCertificateGroup = document.getElementById('internshipCertificateGroup');
             const successMessage = document.getElementById('successMessage');
+            
+            // Custom Multi-Select Dropdowns
+            const skillsMultiselect = document.getElementById('skillsMultiselect');
+            const skillsDropdown = document.getElementById('skillsDropdown');
+            const skillsSelected = document.getElementById('skillsSelected');
+            const skillsCheckboxes = skillsDropdown.querySelectorAll('input[type="checkbox"]');
+            
+            const languagesMultiselect = document.getElementById('languagesMultiselect');
+            const languagesDropdown = document.getElementById('languagesDropdown');
+            const languagesSelected = document.getElementById('languagesSelected');
+            const languagesCheckboxes = languagesDropdown.querySelectorAll('input[type="checkbox"]');
+            
+            // Skills dropdown functionality
+            skillsMultiselect.addEventListener('click', function() {
+                skillsDropdown.classList.toggle('show');
+                skillsMultiselect.classList.toggle('active');
+                
+                // Close other dropdowns
+                languagesDropdown.classList.remove('show');
+                languagesMultiselect.classList.remove('active');
+            });
+            
+            // Languages dropdown functionality
+            languagesMultiselect.addEventListener('click', function() {
+                languagesDropdown.classList.toggle('show');
+                languagesMultiselect.classList.toggle('active');
+                
+                // Close other dropdowns
+                skillsDropdown.classList.remove('show');
+                skillsMultiselect.classList.remove('active');
+            });
+            
+            // Update selected items display for skills
+            skillsCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    updateSelectedItems(skillsCheckboxes, skillsSelected, skillsMultiselect);
+                });
+            });
+            
+            // Update selected items display for languages
+            languagesCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    updateSelectedItems(languagesCheckboxes, languagesSelected, languagesMultiselect);
+                });
+            });
+            
+            // Function to update selected items display
+            function updateSelectedItems(checkboxes, selectedContainer, multiselect) {
+                selectedContainer.innerHTML = '';
+                let selectedCount = 0;
+                
+                checkboxes.forEach(checkbox => {
+                    if (checkbox.checked) {
+                        selectedCount++;
+                        const item = document.createElement('div');
+                        item.className = 'selected-item';
+                        item.innerHTML = `${checkbox.parentElement.textContent.trim()} <span>×</span>`;
+                        
+                        // Add remove functionality
+                        item.querySelector('span').addEventListener('click', function(e) {
+                            e.stopPropagation();
+                            checkbox.checked = false;
+                            updateSelectedItems(checkboxes, selectedContainer, multiselect);
+                        });
+                        
+                        selectedContainer.appendChild(item);
+                    }
+                });
+                
+                // Update multiselect text
+                if (selectedCount === 0) {
+                    multiselect.textContent = multiselect.id === 'skillsMultiselect' ? 'Select Skills' : 'Select Languages';
+                } else {
+                    multiselect.textContent = `${selectedCount} selected`;
+                }
+            }
+            
+            // Close dropdowns when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!skillsMultiselect.contains(e.target) && !skillsDropdown.contains(e.target)) {
+                    skillsDropdown.classList.remove('show');
+                    skillsMultiselect.classList.remove('active');
+                }
+                
+                if (!languagesMultiselect.contains(e.target) && !languagesDropdown.contains(e.target)) {
+                    languagesDropdown.classList.remove('show');
+                    languagesMultiselect.classList.remove('active');
+                }
+            });
             
             // OTP Generation Simulation
             generateOtpBtn.addEventListener('click', function() {
@@ -510,8 +696,12 @@
                 const otp = document.getElementById('otp').value.trim();
                 const qualification = document.getElementById('qualification').value;
                 const course = document.getElementById('course').value.trim();
-                const skills = document.getElementById('skills');
-                const selectedSkills = Array.from(skills.selectedOptions).map(option => option.value);
+                
+                // Check if at least one skill is selected
+                let skillsSelected = false;
+                skillsCheckboxes.forEach(checkbox => {
+                    if (checkbox.checked) skillsSelected = true;
+                });
                 
                 let isValid = true;
                 let errorMessage = '';
@@ -544,7 +734,7 @@
                     errorMessage += 'Course is required.\n';
                 }
                 
-                if (selectedSkills.length === 0) {
+                if (!skillsSelected) {
                     isValid = false;
                     errorMessage += 'At least one skill is required.\n';
                 }
@@ -558,6 +748,12 @@
                 successMessage.style.display = 'block';
                 form.reset();
                 internshipCertificateGroup.classList.add('hidden');
+                
+                // Reset custom dropdowns
+                skillsCheckboxes.forEach(checkbox => checkbox.checked = false);
+                languagesCheckboxes.forEach(checkbox => checkbox.checked = false);
+                updateSelectedItems(skillsCheckboxes, document.getElementById('skillsSelected'), skillsMultiselect);
+                updateSelectedItems(languagesCheckboxes, document.getElementById('languagesSelected'), languagesMultiselect);
                 
                 // Scroll to success message
                 successMessage.scrollIntoView({ behavior: 'smooth' });
